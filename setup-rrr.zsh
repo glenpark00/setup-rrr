@@ -1,4 +1,4 @@
-function setup-react-redux-rails {
+function setup-rrr {
   # These conditionals handle the source folder/entry file names (default: frontend, entry_file), and sets the name of your Rails project to the project_name variable
   # Note that if you want to change the default name of only the source folder, you still need to pass in a first argument for entry file
   project_name=$1
