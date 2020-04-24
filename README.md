@@ -36,9 +36,11 @@ If you only want to change the name of the source folder, you **must** still pas
 ### How to call these functions in terminal: 
 
 - setup-react <folder_name> <file_name>
+
 ex. setup-react src index.jsx
 
 - setup-rrr <project_name> <file_name> <folder_name>
+
 ex. setup-rrr rails_proj rails_proj frontend 
 
 ### Note
