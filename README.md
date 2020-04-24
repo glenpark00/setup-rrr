@@ -21,27 +21,21 @@ For bash users: You can copy and paste the functions into your .bash_profile fol
 
 For zsh users: You should copy and paste the functions either in your .zshrc or .zshenv file (I picked my .zshenv file).
 
-## Basic instructions for using setup-react
+## Basic instructions for using these functions
 
-This function takes in two arguments: a source folder name and an entry file name. If no arguments are passed, the default names will be frontend and entry_file.jsx. 
-
-If you only want to change the name of the entry_file, you **must** still pass in an argument for the source folder (this is due to terminal functions being weird and only allowing arguments to be referenced by the number arg that they were).
-
-## Basic instructions for using setup-rrr
-
-This function takes in three arguments: the name of the Rails project, an entry file name (**without** any extension), and a source folder name. The default names for the entry file and source folder are entry_file.jsx and frontend; you must provide the function with the project name argument.
+These functions take in three arguments: the name of the project, an entry file name (**without** any extension), and a source folder name. The default names for the entry file and source folder are entry_file.jsx and frontend; you must provide the function with the project name argument.
 
 If you only want to change the name of the source folder, you **must** still pass in an argument for the entry file (this is due to terminal functions being weird and only allowing arguments to be referenced by the number arg that they were).
 
 ### How to call these functions in terminal: 
 
-- setup-react <folder_name> <file_name>
+- `setup-react <project_name> <file_name> <folder_name>`
 
-ex. setup-react src index.jsx
+ex.  `setup-react react_proj index src`
 
-- setup-rrr <project_name> <file_name> <folder_name>
+- `setup-rrr <project_name> <file_name> <folder_name>`
 
-ex. setup-rrr rails_proj rails_proj frontend 
+ex.  `setup-rrr rails_proj entry_file frontend `
 
 ### Note
 I have uploaded the file as a .zsh so that the coloring in code editors would look nice. **Please** copy and paste the code within setup-react.zsh into a file that is suitable for your shell.
