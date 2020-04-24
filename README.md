@@ -6,7 +6,7 @@ Because boilerplate code really sucks.
 
 The goal of this project is to create a set of console commands that will take a lot of the boilerplate code out of setting up and developing a web app using React and Redux, with a Rails backend. At the moment, this project consists of two functions: the first one (setup-react) will setup a simple React project for you, with the basic packages and webpack all configured; the second one (setup-rrr) will setup a complete React-Redux-Rails project for you. This includes adding some useful/necessary gems (however, BCrypt is still commented out in the Gemfile!), installing all required packages, setting up the state shape and reducers, and giving you a basic entry file. 
 
-This project is still developing, and the end goal for it is to be fully fleshed out into a package that can aid in developing any React-Redux-Rails project.
+This project is still developing, and the end goal for it is to be fully fleshed out into a package that can aid in creating and developing any React-Redux-Rails project.
 
 ## Setting up this function
 
