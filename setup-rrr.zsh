@@ -55,23 +55,33 @@ function setup-rrr {
   # Creates the actions, components, reducers, store, and util directories in the source folder, and adds some rudimentary files to them
   mkdir $source_folder/actions
   mkdir $source_folder/components
-  echo "import React from 'react';\n\nconst App = () => (\n\t<div>\n\t\t<h1>$project_name Homepage</h1>\n\t</div>\n);\n\nexport default App;" > $source_folder/components/app.jsx  
+  camelCasedName=`echo "${project_name}" | perl -pe "s/(^|_)./uc($&)/ge;s/_//g"` # This line just camel cases the project name
+  echo "import React from 'react';\n\nconst App = () => (\n\t<div>\n\t\t<h1>$camelCasedName Homepage</h1>\n\t</div>\n);\n\nexport default App;" > $source_folder/components/app.jsx 
+
   echo 'import React from "react";\nimport { Provider } from "react-redux";\nimport { HashRouter } from "react-router-dom";\nimport App from "./app";\n\nconst Root = ({ store }) =>(\n\t<Provider store={store}>\n\t\t<HashRouter>\n\t\t\t<App />\n\t\t</HashRouter>\n\t</Provider>\n);\n\nexport default Root;' > $source_folder/components/root.jsx
   mkdir $source_folder/reducers
   echo 'import { combineReducers } from "redux";\n\nconst entitiesReducer = combineReducers({\n\n});\n\nexport default entitiesReducer;' > $source_folder/reducers/entities_reducer.js
   echo 'import { combineReducers } from "redux";\n\nconst errorsReducer = combineReducers({\n\n});\n\nexport default errorsReducer;' > $source_folder/reducers/errors_reducer.js
   echo 'import { combineReducers } from "redux";\n\nconst uiReducer = combineReducers({\n\n});\n\nexport default uiReducer;' > $source_folder/reducers/ui_reducer.js
-  echo 'import { combineReducers } from "redux";\nimport rootReducer from "./root_reducer.js"\nimport entitiesReducer from "./entities_reducer";\nimport uiReducer from "./ui_reducer";\n\nconst rootReducer = combineReducers({\n\tentities: entitiesReducer,\n\terrors: errorsReducer,\n\tui: uiReducer\n})\n\nexport default rootReducer;' > $source_folder/reducers/root_reducer.js
+  echo 'import { combineReducers } from "redux";\nimport entitiesReducer from "./entities_reducer";\nimport errorsReducer from "./errors_reducer.js";\nimport uiReducer from "./ui_reducer";\n\nconst rootReducer = combineReducers({\n\tentities: entitiesReducer,\n\terrors: errorsReducer,\n\tui: uiReducer\n})\n\nexport default rootReducer;' > $source_folder/reducers/root_reducer.js
   mkdir $source_folder/store
   echo 'import { createStore, applyMiddleware } from "redux";\nimport rootReducer from "../reducers/root_reducer";\nimport thunk from "redux-thunk";\nimport logger from "redux-logger";\n\nconst configureStore = (preloadedState = {}) => (\n\tcreateStore(\n\t\trootReducer,\n\t\tpreloadedState,\n\t\tapplyMiddleware(thunk, logger)\n\t)\n)\n\nexport default configureStore;' > $source_folder/store/store.js
   mkdir $source_folder/util
 
+  # Creates the static pages controller, adds the route for the root, and creates root.html.erb
+  rails g controller StaticPages
+  echo "Rails.application.routes.draw do\n\t# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html\n\troot to: 'static_pages#root'\nend" > config/routes.rb
+  echo 'class StaticPagesController < ApplicationController\n\tdef root\n\t\trender :root\n\tend\nend' > app/controllers/static_pages_controller.rb
+  echo "<div id='root'>This is the root</div>" > app/views/static_pages/root.html.erb
+
+  # Creates the database
+  rails db:create
+  
   # Installing all of the necessary dependencies; --save means we will save it to package.json, and --save-dev will save the package as a devDependency
   npm init -y
   npm install react react-dom react-router-dom react-redux redux redux-thunk --save
   npm install @babel/core @babel/preset-env @babel/preset-react babel-loader redux-logger webpack webpack-cli --save-dev
 
-  # Adds the script to run webpack in package.json and runs the script
+  # Adds the script to run webpack in package.json
   jq '.scripts.webpack="webpack --watch --mode=development"' package.json | sponge package.json
-  npm run webpack
 } 
