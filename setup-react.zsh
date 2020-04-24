@@ -1,18 +1,23 @@
 function setup-react {
-  # These conditionals handle the source folder/entry file names (default: frontend, entry_file.jsx)
-  # Note that if you want to change the default name of only the entry file, you still need to pass in a first argument for source folder
-  if [[ -z "$1" ]] 
-  then 
-    source_folder=frontend
-  else
-    source_folder=$1
-  fi
+  # These conditionals handle the source folder/entry file names (default: frontend, entry_file), and sets the name of your React project to the project_name variable
+  # Note that if you want to change the default name of only the source folder, you still need to pass in a first argument for entry file
+
+  project_name=$1
   if [[ -z "$2" ]] 
   then 
     entry_file=entry_file.jsx
   else
-    entry_file=$2
+    entry_file="${2}.jsx"
   fi
+  if [[ -z "$3" ]] 
+  then 
+    source_folder=frontend
+  else
+    source_folder=$3
+  fi
+  # Creates the project directory
+  mkdir $project_name
+  cd $project_name
   # Installing all of the necessary dependencies; --save means we will save it to package.json, and --save-dev will save the package as a devDependency
   npm init -y
   npm install react react-dom --save
