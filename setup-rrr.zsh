@@ -43,7 +43,7 @@ function setup-rrr {
   echo '\n# Converts JBuilder keys to camelCase\nJbuilder.key_format camelize: :lower' >> config/environment.rb
 
   # Create the .gitignore file so that node-modules and bundle.js won't be pushed to github
-  echo 'node-modules/\napp/assets/javascripts/bundle.js\napp/assets/javascripts/bundle.js.map' > .gitignore
+  echo '# Ignore bundler config\n/.bundle\n\n# Ignore all logfiles and tempfiles\n/log/*\n/tmp/*\n!/log/.keep\n!/tmp/.keep\n\n# Ignore uploaded files in development\n/storage/*\n!/storage/.keep\n\n/node_modules\n/yarn-error.log\n\n/public/assets\n.byebug_history\n\n# Ignore master key for decrypting credentials and more\n/config/master.key\nbundle.js\nbundle.js.map\n.byebug_history\n.DS_Store\nnpm-debug.log' > .gitignore
 
   # Creates and writes to webpack.config.js, using the correct source folder and entry file
   echo "const path = require('path');\n\nmodule.exports = {\n\tentry: './$source_folder/$entry_file',\n\toutput: {\n\t\tpath: path.resolve(__dirname, 'app', 'assets', 'javascripts'),\n\t\tfilename: 'bundle.js'\n\t},\n\tmodule: {\n\t\trules: [\n\t\t\t{\n\t\t\t\ttest: /\.jsx?$/,\n\t\t\t\texclude: /(node_modules)/,\n\t\t\t\tuse: {\n\t\t\t\t\tloader: 'babel-loader',\n\t\t\t\t\tquery: {\n\t\t\t\t\t\tpresets: ['@babel/env', '@babel/react']\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t}\n\t\t]\n\t},\n\tresolve: {\n\t\textensions: ['.js', '.jsx', '*']\n\t},\n\tdevtool: 'source-map'\n};" > webpack.config.js
