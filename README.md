@@ -17,9 +17,9 @@ For Linux: apt install jq; apt install moreutils
 
 You also must have Ruby on Rails installed (gem install rails -v 5.2.3) as well as Node Package Manager (brew install npm).
 
-For bash users: You can copy and paste the functions into your .bash_profile folder (you can open this up to edit in VSCode using the command code ~/.bash_profile)
+For bash users: You can copy and paste the function from setup-rrr.zsh either into your .bash_profile or .bashrc file (you can open this up to edit in VSCode using the command code ~/.bash_profile)
 
-For zsh users: You should copy and paste the functions either in your .zshrc or .zshenv file (I picked my .zshenv file).
+For zsh users: You should copy and paste the function from setup-rrr.zsh either in your .zshrc or .zshenv file (I picked my .zshenv file).
 
 ## Basic instructions for using these functions
 
