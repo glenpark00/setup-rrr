@@ -37,7 +37,7 @@ function setup-rrr {
   # Note that the perl command does not support escaped tabs, so I manually put two spaces to mimic a tab in the last five commands; sorry to all you four space tabbers out there!
 
   # Uses perl to in-place edit the application.js file to include the jqeury sprocket
-  perl -i -lpe 'print "//= require jquery" if $. == 14' app/assets/javascripts/application.js
+  perl -i -lpe 'print "//= require jquery" if $. == 13' app/assets/javascripts/application.js
 
   # Adds a line in config/environment.rb to automatically camelize the keys of the JSON outputted from Jbuilder
   echo '\n# Converts JBuilder keys to camelCase\nJbuilder.key_format camelize: :lower' >> config/environment.rb
